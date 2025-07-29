@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SupplyWala - Raw Ingredients From Trusted Suppliers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'desi-orange': '#FF6B35',
+                        'desi-red': '#DC2626',
+                        'desi-yellow': '#FCD34D',
+                        'desi-green': '#10B981',
+                        'masala-red': '#EF4444',
+                        'turmeric': '#F59E0B',
+                        'mint-green': '#34D399',
+                        'chili-red': '#B91C1C',
+                        'curry-yellow': '#FBBF24',
+                        'tandoor-orange': '#FB923C'
+                    },
+                    animation: {
+                        'gentle-bounce': 'gentleBounce 4s ease-in-out infinite',
+                        'subtle-float': 'subtleFloat 8s ease-in-out infinite',
+                        'soft-glow': 'softGlow 3s ease-in-out infinite alternate',
+                    },
+                    keyframes: {
+                        gentleBounce: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        subtleFloat: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        softGlow: {
+                            '0%': { boxShadow: '0 0 5px rgba(16, 185, 129, 0.3)' },
+                            '100%': { boxShadow: '0 0 15px rgba(16, 185, 129, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        .baloo { font-family: 'Baloo Bhai 2', cursive; }
+        .poppins { font-family: 'Poppins', sans-serif; }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #FF6B35 0%, #DC2626 25%, #F59E0B 50%, #10B981 75%, #FB923C 100%);
+            background-size: 200% 200%;
+            animation: gentleGradientShift 15s ease infinite;
+        }
+        
+        @keyframes gentleGradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .floating-ingredient {
+            position: absolute;
+            animation: subtleFloat 12s ease-in-out infinite;
+            opacity: 0.4;
+        }
+        
+        .floating-ingredient:nth-child(2) { animation-delay: -3s; }
+        .floating-ingredient:nth-child(3) { animation-delay: -6s; }
+        .floating-ingredient:nth-child(4) { animation-delay: -9s; }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(45deg, #FF6B35, #DC2626, #F59E0B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glow-button {
+            transition: all 0.3s ease;
+        }
+        
+        .glow-button:hover {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            transform: translateY(-1px);
+        }
+        
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth scroll behavior for the entire page */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Enhanced link hover effects */
+        .nav-link-hover {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #FF6B35, #DC2626);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link-hover:hover::after {
+            width: 100%;
+        }
+        
+        /* Section highlight animation */
+        .section-highlight {
+            animation: sectionGlow 2s ease-in-out;
+        }
+        
+        @keyframes sectionGlow {
+            0% { box-shadow: 0 0 0 rgba(255, 107, 53, 0); }
+            50% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); }
+            100% { box-shadow: 0 0 0 rgba(255, 107, 53, 0); }
+        }
+        
+        /* Link click animation */
+        .link-click-animation {
+            animation: linkClick 0.2s ease-in-out;
+        }
+        
+        @keyframes linkClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50">
+    <!-- TODO: BACKEND INTEGRATION - Floating elements positions should be stored in CMS -->
+    <!-- Floating Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div class="floating-ingredient text-5xl" style="top: 15%; left: 5%; color: #FF6B35;">🥔</div>
+        <div class="floating-ingredient text-4xl" style="top: 25%; right: 8%; color: #F59E0B;">🌶️</div>
+        <div class="floating-ingredient text-4xl" style="top: 65%; left: 10%; color: #10B981;">🫙</div>
+        <div class="floating-ingredient text-4xl" style="top: 80%; right: 12%; color: #DC2626;">🧂</div>
+    </div>
+
+    <!-- Navigation -->
+    <!-- TODO: BACKEND INTEGRATION - User authentication status, cart count from API -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-md shadow-lg z-50 border-b-4 border-desi-orange">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-3xl">🛒</div>
+                    <span class="ml-3 text-2xl font-bold baloo gradient-text">SupplyWala</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <!-- TODO: BACKEND - Dynamic navigation based on user role -->
+                    <a href="#" class="text-gray-700 hover:text-desi-orange font-semibold poppins transition-colors cursor-pointer nav-link-hover" onclick="handleNavLinkClick(event, 'hero')">Home</a>
+                    <a href="#search_bar" class="text-gray-700 hover:text-desi-orange font-semibold poppins transition-colors cursor-pointer nav-link-hover" onclick="handleNavLinkClick(event, 'search_bar')">Search</a>
+                    <a href="#product_suppliers" class="text-gray-700 hover:text-desi-orange font-semibold poppins transition-colors cursor-pointer nav-link-hover" onclick="handleNavLinkClick(event, 'product_suppliers')">Products and Suppliers</a>
+                    <a href="#how_it_work" class="text-gray-700 hover:text-desi-orange font-semibold poppins transition-colors cursor-pointer nav-link-hover" onclick="handleNavLinkClick(event, 'how_it_work')">How It Works</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <!-- TODO: BACKEND - Cart count from user session/database -->
+                    <button class="relative p-2 text-gray-700 hover:text-desi-orange transition-colors" onclick="openCart()">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-masala-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">2</span>
+                    </button>
+                    <!-- TODO: BACKEND - Check authentication status, show user name if logged in -->
+                    <button class="bg-gradient-to-r from-desi-orange to-masala-red text-white px-6 py-2 rounded-full font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="handleAuth()">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <!-- TODO: BACKEND INTEGRATION - Hero content should be manageable via CMS -->
+    <section id="hero" class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
+        <!-- Subtle Background Elements -->
+        <div class="absolute inset-0 opacity-15">
+            <div class="absolute top-20 left-10 text-8xl">🛒</div>
+            <div class="absolute top-40 right-20 text-6xl">🥔</div>
+            <div class="absolute bottom-20 left-20 text-7xl">🌶️</div>
+            <div class="absolute bottom-40 right-10 text-5xl">🫙</div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div data-aos="zoom-in" data-aos-duration="1000">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-black baloo text-white mb-6 leading-tight">
+                    <span class="block">Get Raw Ingredients</span>
+                    <span class="block text-curry-yellow">From Trusted Suppliers</span>
+                    <span class="block text-mint-green">Faster Than Ever!</span>
+                </h1>
+            </div>
+
+            <div data-aos="fade-up" data-aos-delay="500" data-aos-duration="1000">
+                <p class="text-xl md:text-2xl text-white/90 mb-4 poppins font-medium">
+                    For panipuri walas, dosa masters & chaat kings
+                </p>
+                <p class="text-lg md:text-xl text-white/80 mb-8 poppins">
+                    — all at one place 🏪
+                </p>
+            </div>
+
+
+
+            <!-- TODO: BACKEND - Trust indicators from real-time database stats -->
+            <div data-aos="fade-up" data-aos-delay="1200" class="mt-12 flex flex-wrap justify-center gap-6">
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center space-x-2">
+                    <span class="text-2xl">✅</span>
+                    <span class="text-white font-semibold poppins" id="supplier-count">500+ Verified Suppliers</span>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center space-x-2">
+                    <span class="text-2xl">⚡</span>
+                    <span class="text-white font-semibold poppins">Same Day Delivery</span>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 flex items-center space-x-2">
+                    <span class="text-2xl">💰</span>
+                    <span class="text-white font-semibold poppins">Best Prices Guaranteed</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Discovery Section -->
+    <section class="py-16 bg-gradient-to-r from-curry-yellow to-turmeric relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" id="search_bar">
+            <!-- Search Bar -->
+            <!-- TODO: BACKEND INTEGRATION - Search with autocomplete, recent searches, popular searches -->
+            <div data-aos="fade-down" data-aos-duration="1000" class="mb-12">
+                <div class="max-w-4xl mx-auto">
+                    <div class="relative">
+                        <input type="text" 
+                               id="main-search"
+                               placeholder="🔍 Search for potatoes, flour, masala, oil, spices..."
+                               class="w-full px-8 py-6 text-xl rounded-2xl border-4 border-white shadow-2xl focus:outline-none focus:ring-4 focus:ring-desi-green poppins font-medium bg-white"
+                               onkeyup="handleSearch(this.value)"
+                               onfocus="showSearchSuggestions()">
+                        <!-- TODO: BACKEND - Search suggestions dropdown -->
+                        <div id="search-suggestions" class="absolute top-full left-0 right-0 bg-white rounded-b-2xl shadow-2xl hidden z-10">
+                            <!-- Dynamic search suggestions will be populated here -->
+                        </div>
+                        <button class="absolute right-3 top-3 bg-gradient-to-r from-desi-green to-mint-green text-white px-8 py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="performSearch()">
+                            <i class="fas fa-search mr-2"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <!-- TODO: BACKEND INTEGRATION - Categories from database with supplier counts -->
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <h2 class="text-4xl font-bold baloo text-center text-white mb-8">
+                    🛍️ Shop by Category 🛍️
+                </h2>
+                <div class="flex overflow-x-auto space-x-6 pb-4 scrollbar-hide" id="categories-container">
+                    <!-- TODO: BACKEND - Dynamic categories from API -->
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="100" onclick="filterByCategory('potatoes')">
+                        <div class="text-5xl mb-4">🥔</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Potatoes</h3>
+                        <p class="text-sm text-gray-600 poppins">Fresh & Quality</p>
+                        <div class="mt-2 bg-desi-green text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="potatoes">200+</span> Suppliers
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="200" onclick="filterByCategory('spices')">
+                        <div class="text-5xl mb-4">🌶️</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Spices</h3>
+                        <p class="text-sm text-gray-600 poppins">Pure Masala</p>
+                        <div class="mt-2 bg-masala-red text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="spices">150+</span> Suppliers
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="300" onclick="filterByCategory('oils')">
+                        <div class="text-5xl mb-4">🫙</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Oils</h3>
+                        <p class="text-sm text-gray-600 poppins">Best Quality</p>
+                        <div class="mt-2 bg-tandoor-orange text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="oils">80+</span> Suppliers
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="400" onclick="filterByCategory('salt')">
+                        <div class="text-5xl mb-4">🧂</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Salt</h3>
+                        <p class="text-sm text-gray-600 poppins">Pure & Clean</p>
+                        <div class="mt-2 bg-desi-green text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="salt">60+</span> Suppliers
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="500" onclick="filterByCategory('chutney')">
+                        <div class="text-5xl mb-4">🍛</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Chutney</h3>
+                        <p class="text-sm text-gray-600 poppins">Fresh & Tasty</p>
+                        <div class="mt-2 bg-curry-yellow text-gray-800 px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="chutney">40+</span> Suppliers
+                        </div>
+                    </div>
+                    
+                    <div class="flex-shrink-0 bg-white rounded-2xl p-6 text-center card-hover cursor-pointer min-w-[160px]" data-aos="fade-left" data-aos-delay="600" onclick="filterByCategory('serveware')">
+                        <div class="text-5xl mb-4">🍽️</div>
+                        <h3 class="font-bold baloo text-xl text-gray-800">Serveware</h3>
+                        <p class="text-sm text-gray-600 poppins">Plates & Bowls</p>
+                        <div class="mt-2 bg-mint-green text-white px-3 py-1 rounded-full text-xs font-semibold">
+                            <span class="supplier-count" data-category="serveware">30+</span> Suppliers
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Grid (Supplier Listings) -->
+    <!-- TODO: BACKEND INTEGRATION - Products from database with pagination, filtering, sorting -->
+    <section class="py-16 bg-gradient-to-b from-mint-green to-desi-green" id="product_suppliers">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div data-aos="zoom-in" data-aos-duration="1000" class="text-center mb-12">
+                <h2 class="text-5xl font-bold baloo text-white mb-4">
+                    🔥 Top Products & Suppliers 🔥
+                </h2>
+                <p class="text-xl text-white/90 poppins">Verified Quality, Best Prices!</p>
+            </div>
+
+            <!-- TODO: BACKEND - Product grid populated from API with real data -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="products-grid">
+                <!-- Product Card 1 -->
+                <!-- TODO: BACKEND - Each product card data from products API -->
+                <div data-aos="flip-up" data-aos-delay="100" class="bg-white rounded-2xl shadow-2xl overflow-hidden card-hover" data-product-id="1">
+                    <div class="relative">
+                        <!-- TODO: BACKEND - Product images from CDN/cloud storage -->
+                        <img src="https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=300&h=200&fit=crop" alt="Fresh Potatoes" class="w-full h-48 object-cover">
+                        <!-- TODO: BACKEND - Verification status from supplier profile -->
+                        <div class="absolute top-3 left-3 bg-desi-green text-white px-3 py-1 rounded-full text-sm font-bold">
+                            ✅ Verified
+                        </div>
+                        <!-- TODO: BACKEND - Wishlist functionality -->
+                        <div class="absolute top-3 right-3 text-2xl cursor-pointer" onclick="toggleWishlist(1)">
+                            <span id="wishlist-1">🤍</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <!-- TODO: BACKEND - Product name, supplier info from database -->
+                        <h3 class="text-xl font-bold baloo text-gray-800 mb-2">Premium Potatoes 🥔</h3>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600 poppins font-medium">Sharma Ji Farms</span>
+                            <div class="flex items-center">
+                                <!-- TODO: BACKEND - Rating from reviews table -->
+                                <div class="flex text-yellow-400 mr-1">
+                                    <span>⭐⭐⭐⭐⭐</span>
+                                </div>
+                                <span class="text-sm text-gray-600">(124)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <!-- TODO: BACKEND - Dynamic pricing from pricing API -->
+                                <span class="text-2xl font-bold text-desi-green">₹<span class="product-price">25</span></span>
+                                <span class="text-gray-600 poppins">/kg</span>
+                            </div>
+                            <!-- TODO: BACKEND - Stock status from inventory -->
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold stock-status">In Stock</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <!-- TODO: BACKEND - Add to cart functionality -->
+                            <button class="flex-1 bg-gradient-to-r from-desi-orange to-masala-red text-white py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="addToCart(1, 'Premium Potatoes', 25)">
+                                Add to Cart
+                            </button>
+                            <!-- TODO: BACKEND - Chat with supplier -->
+                            <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-4 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all" onclick="chatWithSupplier('sharma-ji-farms')">
+                                💬
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 2 -->
+                <div data-aos="flip-up" data-aos-delay="200" class="bg-white rounded-2xl shadow-2xl overflow-hidden card-hover" data-product-id="2">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=300&h=200&fit=crop" alt="Red Chili Powder" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-masala-red text-white px-3 py-1 rounded-full text-sm font-bold">
+                            🌶️ Hot Deal
+                        </div>
+                        <div class="absolute top-3 right-3 text-2xl cursor-pointer" onclick="toggleWishlist(2)">
+                            <span id="wishlist-2">🤍</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold baloo text-gray-800 mb-2">Red Chili Powder 🌶️</h3>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600 poppins font-medium">Masala King Co.</span>
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400 mr-1">
+                                    <span>⭐⭐⭐⭐⭐</span>
+                                </div>
+                                <span class="text-sm text-gray-600">(89)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-desi-green">₹<span class="product-price">180</span></span>
+                                <span class="text-gray-600 poppins">/kg</span>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">In Stock</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-gradient-to-r from-desi-orange to-masala-red text-white py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="addToCart(2, 'Red Chili Powder', 180)">
+                                Add to Cart
+                            </button>
+                            <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-4 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all" onclick="chatWithSupplier('masala-king-co')">
+                                💬
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 3 -->
+                <div data-aos="flip-up" data-aos-delay="300" class="bg-white rounded-2xl shadow-2xl overflow-hidden card-hover" data-product-id="3">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=300&h=200&fit=crop" alt="Mustard Oil" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-curry-yellow text-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+                            🫙 Premium
+                        </div>
+                        <div class="absolute top-3 right-3 text-2xl cursor-pointer" onclick="toggleWishlist(3)">
+                            <span id="wishlist-3">🤍</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold baloo text-gray-800 mb-2">Pure Mustard Oil 🫙</h3>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600 poppins font-medium">Golden Oil Mills</span>
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400 mr-1">
+                                    <span>⭐⭐⭐⭐</span>
+                                </div>
+                                <span class="text-sm text-gray-600">(67)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-desi-green">₹<span class="product-price">150</span></span>
+                                <span class="text-gray-600 poppins">/L</span>
+                            </div>
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm font-semibold">Low Stock</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <!-- TODO: BACKEND - Request quote functionality -->
+                            <button class="flex-1 bg-gradient-to-r from-desi-orange to-masala-red text-white py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="requestQuote(3, 'Pure Mustard Oil')">
+                                Request Quote
+                            </button>
+                            <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-4 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all" onclick="chatWithSupplier('golden-oil-mills')">
+                                💬
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Card 4 -->
+                <div data-aos="flip-up" data-aos-delay="400" class="bg-white rounded-2xl shadow-2xl overflow-hidden card-hover" data-product-id="4">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1586201375761-83865001e31c?w=300&h=200&fit=crop" alt="Wheat Flour" class="w-full h-48 object-cover">
+                        <div class="absolute top-3 left-3 bg-desi-green text-white px-3 py-1 rounded-full text-sm font-bold">
+                            ✅ Verified
+                        </div>
+                        <div class="absolute top-3 right-3 text-2xl cursor-pointer" onclick="toggleWishlist(4)">
+                            <span id="wishlist-4">🤍</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold baloo text-gray-800 mb-2">Wheat Flour 🌾</h3>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm text-gray-600 poppins font-medium">Grain Masters</span>
+                            <div class="flex items-center">
+                                <div class="flex text-yellow-400 mr-1">
+                                    <span>⭐⭐⭐⭐⭐</span>
+                                </div>
+                                <span class="text-sm text-gray-600">(203)</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <span class="text-2xl font-bold text-desi-green">₹<span class="product-price">35</span></span>
+                                <span class="text-gray-600 poppins">/kg</span>
+                            </div>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">In Stock</span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-gradient-to-r from-desi-orange to-masala-red text-white py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="addToCart(4, 'Wheat Flour', 35)">
+                                Add to Cart
+                            </button>
+                            <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-4 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all" onclick="chatWithSupplier('grain-masters')">
+                                💬
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TODO: BACKEND - Load more products pagination -->
+            <div class="text-center mt-12">
+                <button class="bg-white text-desi-green px-8 py-4 rounded-full font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="loadMoreProducts()">
+                    Load More Products
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="py-16 bg-gradient-to-r from-tandoor-orange to-desi-orange" id="how_it_work">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div data-aos="fade-down" data-aos-duration="1000" class="text-center mb-12">
+                <h2 class="text-5xl font-bold baloo text-white mb-4">
+                    🧑‍🍳 How It Works 🧑‍🍳
+                </h2>
+                <p class="text-xl text-white/90 poppins">Simple Steps to Get Your Ingredients!</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div data-aos="zoom-in" data-aos-delay="100" class="text-center">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-2xl">
+                        🔍
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-white mb-3">Search Ingredients</h3>
+                    <p class="text-white/80 poppins">Find exactly what you need from our vast catalog of fresh ingredients</p>
+                </div>
+
+                <div data-aos="zoom-in" data-aos-delay="200" class="text-center">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-2xl">
+                        ⚖️
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-white mb-3">Compare Prices</h3>
+                    <p class="text-white/80 poppins">Compare prices from multiple verified suppliers and choose the best deal</p>
+                </div>
+
+                <div data-aos="zoom-in" data-aos-delay="300" class="text-center">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-2xl">
+                        🛒
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-white mb-3">Place Order</h3>
+                    <p class="text-white/80 poppins">Add to cart or request a quote directly from trusted suppliers</p>
+                </div>
+
+                <div data-aos="zoom-in" data-aos-delay="400" class="text-center">
+                    <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-2xl">
+                        🚚
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-white mb-3">Get Delivered</h3>
+                    <p class="text-white/80 poppins">Fast delivery to your location or convenient pickup options</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured/Trusted Suppliers Section -->
+    <!-- TODO: BACKEND INTEGRATION - Featured suppliers from database with real ratings -->
+    <section class="py-16 bg-gradient-to-b from-curry-yellow to-turmeric">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div data-aos="fade-down" data-aos-duration="1000" class="text-center mb-12">
+                <h2 class="text-5xl font-bold baloo text-white mb-4">
+                    🔥 Featured Trusted Suppliers 🔥
+                </h2>
+                <p class="text-xl text-white/90 poppins">Verified Quality Partners!</p>
+            </div>
+
+            <!-- TODO: BACKEND - Supplier cards from suppliers API -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="featured-suppliers">
+                <div data-aos="slide-right" data-aos-delay="100" class="bg-white rounded-2xl p-8 text-center card-hover shadow-2xl" data-supplier-id="sharma-ji-farms">
+                    <div class="w-20 h-20 bg-gradient-to-r from-desi-green to-mint-green rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                        🏪
+                    </div>
+                    <!-- TODO: BACKEND - Supplier info from database -->
+                    <h3 class="text-2xl font-bold baloo text-gray-800 mb-2">Sharma Ji Farms</h3>
+                    <p class="text-gray-600 poppins mb-4">Fresh Vegetables & Potatoes Specialist</p>
+                    <div class="flex items-center justify-center mb-4">
+                        <!-- TODO: BACKEND - Real ratings from reviews -->
+                        <span class="text-yellow-400 text-2xl mr-2">⭐⭐⭐⭐⭐</span>
+                        <span class="text-sm text-gray-600 poppins">(500+ reviews)</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <!-- TODO: BACKEND - Supplier badges from verification system -->
+                        <span class="bg-desi-green text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                        <span class="bg-desi-orange text-white px-3 py-1 rounded-full text-sm font-semibold">Popular in Delhi</span>
+                        <span class="bg-masala-red text-white px-3 py-1 rounded-full text-sm font-semibold">Top Rated</span>
+                    </div>
+                    <!-- TODO: BACKEND - Contact supplier functionality -->
+                    <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-8 py-3 rounded-full font-bold poppins w-full hover:shadow-lg transform hover:scale-105 transition-all" onclick="contactSupplier('sharma-ji-farms')">
+                        Contact Now
+                    </button>
+                </div>
+
+                <div data-aos="slide-right" data-aos-delay="200" class="bg-white rounded-2xl p-8 text-center card-hover shadow-2xl" data-supplier-id="masala-king-co">
+                    <div class="w-20 h-20 bg-gradient-to-r from-masala-red to-chili-red rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                        🌶️
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-gray-800 mb-2">Masala King Co.</h3>
+                    <p class="text-gray-600 poppins mb-4">Premium Spices & Masala Expert</p>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-yellow-400 text-2xl mr-2">⭐⭐⭐⭐⭐</span>
+                        <span class="text-sm text-gray-600 poppins">(350+ reviews)</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <span class="bg-desi-green text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                        <span class="bg-desi-orange text-white px-3 py-1 rounded-full text-sm font-semibold">Popular in Mumbai</span>
+                        <span class="bg-masala-red text-white px-3 py-1 rounded-full text-sm font-semibold">Top Rated</span>
+                    </div>
+                    <button class="bg-gradient-to-r from-masala-red to-chili-red text-white px-8 py-3 rounded-full font-bold poppins w-full hover:shadow-lg transform hover:scale-105 transition-all" onclick="contactSupplier('masala-king-co')">
+                        Contact Now
+                    </button>
+                </div>
+
+                <div data-aos="slide-right" data-aos-delay="300" class="bg-white rounded-2xl p-8 text-center card-hover shadow-2xl" data-supplier-id="golden-oil-mills">
+                    <div class="w-20 h-20 bg-gradient-to-r from-tandoor-orange to-curry-yellow rounded-full flex items-center justify-center mx-auto mb-6 text-3xl">
+                        🫙
+                    </div>
+                    <h3 class="text-2xl font-bold baloo text-gray-800 mb-2">Golden Oil Mills</h3>
+                    <p class="text-gray-600 poppins mb-4">Pure Oils & Cooking Essentials</p>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-yellow-400 text-2xl mr-2">⭐⭐⭐⭐</span>
+                        <span class="text-sm text-gray-600 poppins">(280+ reviews)</span>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2 mb-6">
+                        <span class="bg-desi-green text-white px-3 py-1 rounded-full text-sm font-semibold">Verified</span>
+                        <span class="bg-desi-orange text-white px-3 py-1 rounded-full text-sm font-semibold">Popular in Pune</span>
+                        <span class="bg-masala-red text-white px-3 py-1 rounded-full text-sm font-semibold">Top Rated</span>
+                    </div>
+                    <button class="bg-gradient-to-r from-tandoor-orange to-curry-yellow text-white px-8 py-3 rounded-full font-bold poppins w-full hover:shadow-lg transform hover:scale-105 transition-all" onclick="contactSupplier('golden-oil-mills')">
+                        Contact Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <!-- TODO: BACKEND INTEGRATION - Real testimonials from reviews database -->
+    <section class="py-16 bg-gradient-to-r from-mint-green to-desi-green relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div data-aos="fade-down" data-aos-duration="1000" class="text-center mb-12">
+                <h2 class="text-5xl font-bold baloo text-white mb-4">
+                    🗣️ What Vendors Say 🗣️
+                </h2>
+                <p class="text-xl text-white/90 poppins">Real Reviews from Real Vendors!</p>
+            </div>
+
+            <!-- TODO: BACKEND - Testimonials from reviews API -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="testimonials-container">
+                <div data-aos="slide-up" data-aos-delay="100" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl mb-6">😍</div>
+                    <p class="text-xl baloo text-white mb-6 italic">
+                        "Earlier I had to call 5 people. Now I just click and order. Life is so easy now!"
+                    </p>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-white/90 poppins font-bold text-lg">Ramesh Bhai</p>
+                    <p class="text-white/70 poppins">Panipuri King, Delhi</p>
+                </div>
+
+                <div data-aos="slide-up" data-aos-delay="200" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl mb-6">🤩</div>
+                    <p class="text-xl baloo text-white mb-6 italic">
+                        "Prices are clear and no cheating. Quality is also very good. Highly recommended!"
+                    </p>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-white/90 poppins font-bold text-lg">Sita Ji</p>
+                    <p class="text-white/70 poppins">Dosa Center, Bangalore</p>
+                </div>
+
+                <div data-aos="slide-up" data-aos-delay="300" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center card-hover">
+                    <div class="text-5xl mb-6">🥳</div>
+                    <p class="text-xl baloo text-white mb-6 italic">
+                        "My business has grown 2x since I started using SupplyWala. Amazing platform!"
+                    </p>
+                    <div class="flex items-center justify-center mb-4">
+                        <span class="text-yellow-400 text-2xl">⭐⭐⭐⭐⭐</span>
+                    </div>
+                    <p class="text-white/90 poppins font-bold text-lg">Mohan Lal</p>
+                    <p class="text-white/70 poppins">Chaat Master, Mumbai</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Footer/Contact Section -->
+    <footer class="bg-gray-900 text-white py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <!-- Help Section -->
+            <div data-aos="fade-up" data-aos-duration="1000" class="text-center mb-12">
+                <h2 class="text-4xl font-bold baloo text-curry-yellow mb-4">
+                    📞 Need Help? We're Here! 📞
+                </h2>
+                <p class="text-xl text-white/90 poppins mb-6">Call us anytime for support</p>
+                <div class="bg-gradient-to-r from-desi-green to-mint-green rounded-2xl p-8 inline-block">
+                    <!-- TODO: BACKEND - Dynamic support phone number -->
+                    <div class="text-3xl font-bold baloo text-white mb-2">📞 1800-******</div>
+                    <p class="text-white/90 poppins">Available 24/7 for all your needs</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Company Info -->
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl">🛒</div>
+                        <span class="ml-3 text-3xl font-bold baloo gradient-text">SupplyWala</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 poppins text-lg">
+                        India's #1 platform connecting street food vendors with trusted suppliers. Fresh ingredients, best prices, reliable delivery!
+                    </p>
+                    <div class="flex space-x-4">
+                        <!-- TODO: BACKEND - Social media links from settings -->
+                        <a href="#" class="w-12 h-12 bg-gradient-to-r from-desi-orange to-masala-red rounded-full flex items-center justify-center hover:shadow-lg transform hover:scale-110 transition-all">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-r from-desi-green to-mint-green rounded-full flex items-center justify-center hover:shadow-lg transform hover:scale-110 transition-all">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-r from-turmeric to-curry-yellow rounded-full flex items-center justify-center hover:shadow-lg transform hover:scale-110 transition-all">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 bg-gradient-to-r from-masala-red to-chili-red rounded-full flex items-center justify-center hover:shadow-lg transform hover:scale-110 transition-all">
+                            <i class="fab fa-youtube text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold baloo mb-6 text-curry-yellow">Quick Links</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'about')">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'how-it-works')">How It Works</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'suppliers')">Suppliers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'categories')">Categories</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'pricing')">Pricing</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h3 class="text-xl font-bold baloo mb-6 text-mint-green">Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'help')">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'contact')">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'track-order')">Track Order</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'returns')">Returns</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-desi-orange transition-colors poppins cursor-pointer nav-link-hover" onclick="handleFooterLinkClick(event, 'faq')">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 poppins mb-4 md:mb-0">
+                        © 2024 SupplyWala. Made with ❤️ for Street Food Heroes of India!
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-desi-orange poppins transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-desi-orange poppins transition-colors">Terms of Service</a>
+                    </div>
+                </div>
+                
+                <!-- Simple Footer Animation -->
+                <div class="mt-8 text-center">
+                    <div class="text-5xl inline-block">🛒</div>
+                    <p class="text-curry-yellow baloo text-xl mt-2">Dhanyawad! Happy Selling! 🙏</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Contact Button -->
+    <!-- TODO: BACKEND - WhatsApp integration with pre-filled message -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button class="bg-gradient-to-r from-desi-green to-mint-green text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transform hover:scale-110 transition-all" onclick="openWhatsAppChat()">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- AOS Animation Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS with gentler settings
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out'
+        });
+
+        // TODO: BACKEND INTEGRATION - All JavaScript functions need API endpoints
+
+        // Cart Management
+        let cart = JSON.parse(localStorage.getItem('supplywala_cart')) || [];
+
+        // TODO: BACKEND - Authentication check
+        function handleAuth() {
+            // Check if user is logged in
+            const isLoggedIn = localStorage.getItem('supplywala_user_token');
+            if (isLoggedIn) {
+                // Redirect to dashboard
+                window.location.href = '/dashboard';
+            } else {
+                // Redirect to login page
+                window.location.href = '/login';
+            }
+        }
+
+        // TODO: BACKEND - Search functionality with API
+        function handleSearch(query) {
+            if (query.length > 2) {
+                // Debounce search requests
+                clearTimeout(window.searchTimeout);
+                window.searchTimeout = setTimeout(() => {
+                    // API call to search products
+                    fetch(`/api/search?q=${encodeURIComponent(query)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            showSearchSuggestions(data.suggestions);
+                        })
+                        .catch(error => console.error('Search error:', error));
+                }, 300);
+            }
+        }
+
+        // TODO: BACKEND - Show search suggestions
+        function showSearchSuggestions(suggestions = []) {
+            const suggestionsContainer = document.getElementById('search-suggestions');
+            if (suggestions.length > 0) {
+                suggestionsContainer.innerHTML = suggestions.map(item => 
+                    `<div class="p-3 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion('${item.name}')">${item.name}</div>`
+                ).join('');
+                suggestionsContainer.classList.remove('hidden');
+            } else {
+                suggestionsContainer.classList.add('hidden');
+            }
+        }
+
+        // TODO: BACKEND - Perform search with analytics
+        function performSearch() {
+            const query = document.getElementById('main-search').value;
+            if (query.trim()) {
+                // Track search analytics
+                fetch('/api/analytics/search', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, timestamp: new Date().toISOString() })
+                });
+                
+                // Redirect to search results
+                window.location.href = `/search?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // TODO: BACKEND - Filter by category
+        function filterByCategory(category) {
+            // Track category click
+            fetch('/api/analytics/category-click', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ category, timestamp: new Date().toISOString() })
+            });
+            
+            window.location.href = `/products?category=${category}`;
+        }
+
+        // TODO: BACKEND - Add to cart functionality
+        function addToCart(productId, productName, price) {
+            const cartItem = {
+                id: productId,
+                name: productName,
+                price: price,
+                quantity: 1,
+                timestamp: new Date().toISOString()
+            };
+
+            // Add to local cart
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push(cartItem);
+            }
+
+            // Save to localStorage
+            localStorage.setItem('supplywala_cart', JSON.stringify(cart));
+
+            // Update cart count
+            updateCartCount();
+
+            // API call to sync with backend
+            fetch('/api/cart/add', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('supplywala_user_token')}`
+                },
+                body: JSON.stringify(cartItem)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('🎉 Added to Cart! 🛒', 'success');
+                }
+            })
+            .catch(error => {
+                console.error('Cart sync error:', error);
+                showNotification('Added to cart locally', 'info');
+            });
+        }
+
+        // TODO: BACKEND - Request quote functionality
+        function requestQuote(productId, productName) {
+            // Redirect to quote request form
+            window.location.href = `/quote-request?product=${productId}&name=${encodeURIComponent(productName)}`;
+        }
+
+        // TODO: BACKEND - Chat with supplier
+        function chatWithSupplier(supplierId) {
+            // Check if user is logged in
+            const userToken = localStorage.getItem('supplywala_user_token');
+            if (!userToken) {
+                alert('Please login to chat with suppliers');
+                window.location.href = '/login';
+                return;
+            }
+
+            // Open chat interface
+            window.location.href = `/chat/${supplierId}`;
+        }
+
+        // TODO: BACKEND - Contact supplier
+        function contactSupplier(supplierId) {
+            window.location.href = `/supplier/${supplierId}/contact`;
+        }
+
+        // TODO: BACKEND - Wishlist functionality
+        function toggleWishlist(productId) {
+            const heartElement = document.getElementById(`wishlist-${productId}`);
+            const isWishlisted = heartElement.textContent === '❤️';
+            
+            if (isWishlisted) {
+                heartElement.textContent = '🤍';
+                // Remove from wishlist API
+                fetch(`/api/wishlist/remove/${productId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('supplywala_user_token')}` }
+                });
+            } else {
+                heartElement.textContent = '❤️';
+                // Add to wishlist API
+                fetch(`/api/wishlist/add/${productId}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('supplywala_user_token')}` }
+                });
+            }
+        }
+
+        // TODO: BACKEND - Load more products with pagination
+        function loadMoreProducts() {
+            const currentPage = parseInt(localStorage.getItem('current_page') || '1');
+            const nextPage = currentPage + 1;
+            
+            fetch(`/api/products?page=${nextPage}&limit=8`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.products && data.products.length > 0) {
+                        appendProductsToGrid(data.products);
+                        localStorage.setItem('current_page', nextPage.toString());
+                    } else {
+                        document.querySelector('button[onclick="loadMoreProducts()"]').textContent = 'No More Products';
+                    }
+                })
+                .catch(error => console.error('Load more error:', error));
+        }
+
+        // TODO: BACKEND - Append products to grid
+        function appendProductsToGrid(products) {
+            const grid = document.getElementById('products-grid');
+            products.forEach(product => {
+                const productCard = createProductCard(product);
+                grid.appendChild(productCard);
+            });
+        }
+
+        // TODO: BACKEND - Create product card element
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-2xl shadow-2xl overflow-hidden card-hover';
+            card.setAttribute('data-product-id', product.id);
+            
+            card.innerHTML = `
+                <div class="relative">
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                    <div class="absolute top-3 left-3 bg-desi-green text-white px-3 py-1 rounded-full text-sm font-bold">
+                        ${product.badge || '✅ Verified'}
+                    </div>
+                    <div class="absolute top-3 right-3 text-2xl cursor-pointer" onclick="toggleWishlist(${product.id})">
+                        <span id="wishlist-${product.id}">🤍</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold baloo text-gray-800 mb-2">${product.name}</h3>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm text-gray-600 poppins font-medium">${product.supplier}</span>
+                        <div class="flex items-center">
+                            <div class="flex text-yellow-400 mr-1">
+                                <span>${'⭐'.repeat(product.rating)}</span>
+                            </div>
+                            <span class="text-sm text-gray-600">(${product.reviews})</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <span class="text-2xl font-bold text-desi-green">₹${product.price}</span>
+                            <span class="text-gray-600 poppins">/${product.unit}</span>
+                        </div>
+                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-semibold">${product.stock_status}</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="flex-1 bg-gradient-to-r from-desi-orange to-masala-red text-white py-3 rounded-xl font-bold poppins hover:shadow-lg transform hover:scale-105 transition-all" onclick="addToCart(${product.id}, '${product.name}', ${product.price})">
+                            Add to Cart
+                        </button>
+                        <button class="bg-gradient-to-r from-desi-green to-mint-green text-white px-4 py-3 rounded-xl hover:shadow-lg transform hover:scale-105 transition-all" onclick="chatWithSupplier('${product.supplier_id}')">
+                            💬
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // TODO: BACKEND - Update cart count
+        function updateCartCount() {
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        // TODO: BACKEND - Open cart modal/page
+        function openCart() {
+            window.location.href = '/cart';
+        }
+
+        //  WhatsApp integration
+        function openWhatsAppChat() {
+            const phoneNumber = '91********'; // Replace with actual support number
+            const message = 'Hi! I need help with SupplyWala platform.';
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // TODO: BACKEND - Show notification system
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 px-6 py-3 rounded-full font-bold poppins z-50 transition-all duration-300 ${
+                type === 'success' ? 'bg-desi-green text-white' : 
+                type === 'error' ? 'bg-masala-red text-white' : 
+                'bg-curry-yellow text-gray-800'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.transform = 'translateX(0)';
+                notification.style.opacity = '1';
+            }, 100);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.style.transform = 'translateX(100%)';
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // TODO: BACKEND - Redirect functions
+        function redirectToSearch() {
+            window.location.href = '/search';
+        }
+
+        function redirectToSuppliers() {
+            window.location.href = '/suppliers';
+        }
+
+        // TODO: BACKEND - Load initial data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load cart count
+            updateCartCount();
+            
+            // Load supplier counts for categories
+            fetch('/api/categories/counts')
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelectorAll('.supplier-count').forEach(element => {
+                        const category = element.getAttribute('data-category');
+                        if (data[category]) {
+                            element.textContent = data[category] + '+';
+                        }
+                    });
+                })
+                .catch(error => console.error('Category counts error:', error));
+
+            // Load real-time stats for hero section
+            fetch('/api/stats/platform')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.supplier_count) {
+                        document.getElementById('supplier-count').textContent = `${data.supplier_count}+ Verified Suppliers`;
+                    }
+                })
+                .catch(error => console.error('Platform stats error:', error));
+
+            // Check authentication status
+            const userToken = localStorage.getItem('supplywala_user_token');
+            if (userToken) {
+                // Update login button to show user name or dashboard link
+                fetch('/api/user/profile', {
+                    headers: { 'Authorization': `Bearer ${userToken}` }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.user) {
+                        const loginButton = document.querySelector('button[onclick="handleAuth()"]');
+                        loginButton.textContent = data.user.name || 'Dashboard';
+                    }
+                })
+                .catch(error => console.error('User profile error:', error));
+            }
+
+            // Add gentle hover effects
+            const cards = document.querySelectorAll('.card-hover');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-4px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Search input focus effects
+            const searchInput = document.getElementById('main-search');
+            searchInput.addEventListener('focus', function() {
+                this.style.boxShadow = '0 0 20px rgba(16, 185, 129, 0.3)';
+            });
+            
+            searchInput.addEventListener('blur', function() {
+                this.style.boxShadow = '';
+                // Hide suggestions after a delay
+                setTimeout(() => {
+                    document.getElementById('search-suggestions').classList.add('hidden');
+                }, 200);
+            });
+
+            // Hide search suggestions when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('#main-search') && !event.target.closest('#search-suggestions')) {
+                    document.getElementById('search-suggestions').classList.add('hidden');
+                }
+            });
+        });
+
+        // TODO: BACKEND - Select search suggestion
+        function selectSuggestion(suggestion) {
+            document.getElementById('main-search').value = suggestion;
+            document.getElementById('search-suggestions').classList.add('hidden');
+            performSearch();
+        }
+
+        // TODO: BACKEND - Analytics tracking for user interactions
+        function trackUserInteraction(action, data) {
+            fetch('/api/analytics/interaction', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('supplywala_user_token')}`
+                },
+                body: JSON.stringify({
+                    action,
+                    data,
+                    timestamp: new Date().toISOString(),
+                    page: window.location.pathname
+                })
+            }).catch(error => console.error('Analytics error:', error));
+        }
+
+        // Smooth scroll animation for navigation links
+        function smoothScrollTo(targetId) {
+            const targetElement = document.getElementById(targetId);
+            if (targetElement) {
+                // Add smooth scroll animation
+                targetElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start',
+                    inline: 'nearest'
+                });
+                
+                // Add a subtle highlight effect to the target section
+                targetElement.classList.add('section-highlight');
+                
+                // Remove the highlight class after animation completes
+                setTimeout(() => {
+                    targetElement.classList.remove('section-highlight');
+                }, 2000);
+            }
+        }
+
+        // Handle navigation link clicks with smooth animation
+        function handleNavLinkClick(event, targetId) {
+            event.preventDefault();
+            
+            // Add click animation to the link
+            const link = event.currentTarget;
+            link.classList.add('link-click-animation');
+            
+            setTimeout(() => {
+                link.classList.remove('link-click-animation');
+            }, 200);
+            
+            // Smooth scroll to target
+            smoothScrollTo(targetId);
+            
+            // Track the interaction
+            trackUserInteraction('navigation_click', { target: targetId });
+        }
+
+        // Handle footer quick link clicks
+        function handleFooterLinkClick(event, linkType) {
+            event.preventDefault();
+            
+            // Add click animation
+            const link = event.currentTarget;
+            link.classList.add('link-click-animation');
+            
+            setTimeout(() => {
+                link.classList.remove('link-click-animation');
+            }, 200);
+            
+            // Show loading animation
+            showNotification('🔄 Loading...', 'info');
+            
+            // Simulate page transition (replace with actual navigation)
+            setTimeout(() => {
+                // TODO: BACKEND - Replace with actual page navigation
+                if (linkType === 'about') {
+                    window.location.href = '/about';
+                } else if (linkType === 'how-it-works') {
+                    smoothScrollTo('how_it_work');
+                } else if (linkType === 'suppliers') {
+                    window.location.href = '/suppliers';
+                } else if (linkType === 'categories') {
+                    smoothScrollTo('search_bar');
+                } else if (linkType === 'pricing') {
+                    window.location.href = '/pricing';
+                } else if (linkType === 'help') {
+                    window.location.href = '/help';
+                } else if (linkType === 'contact') {
+                    window.location.href = '/contact';
+                } else if (linkType === 'track-order') {
+                    window.location.href = '/track-order';
+                } else if (linkType === 'returns') {
+                    window.location.href = '/returns';
+                } else if (linkType === 'faq') {
+                    window.location.href = '/faq';
+                }
+            }, 500);
+            
+            trackUserInteraction('footer_link_click', { link_type: linkType });
+        }
+
+        // Add click tracking to important elements
+        document.addEventListener('click', function(event) {
+            if (event.target.matches('button, a, .card-hover')) {
+                const elementText = event.target.textContent?.trim() || event.target.alt || 'Unknown';
+                trackUserInteraction('click', { element: elementText });
+            }
+        });
+    </script>
+</body>
+</html>
