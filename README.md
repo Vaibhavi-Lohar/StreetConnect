@@ -80,6 +80,8 @@ You can use the following credentials to test the platform:
 - 👩‍💻 Kavita Kharade  
 
 ---
+## Live Web Demo:
+🔗 https://streetfoodconnect.infinityfreeapp.com/
 
 ## 📦 Getting Started
 
